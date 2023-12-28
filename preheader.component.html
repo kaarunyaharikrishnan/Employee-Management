@@ -1,0 +1,162 @@
+<div class="container-fluid g-0">
+  <app-header></app-header>
+  <main class="black-borde">
+    <div class="toolbar">
+      <div class="add-employee">
+        <button type="button" class="btn btn-outline-success btn-lg" data-bs-toggle="modal"
+          data-bs-target="#exampleModal" #addEmployeeButton>Add Employee</button>
+      </div>
+
+      <!-- <div class="search-employees">
+        <input type="search" class="form-control" placeholder="Search Employees" #searchInput>
+      </div> -->
+
+    </div>
+  </main>
+</div>
+
+<!-- Form -->
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> Employee Information</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+
+        <form>
+          <!-- FIRST AND LAST NAME -->
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control"name="firstname" placeholder="First Name" [(ngModel)]="firstname">
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" name="lastname"placeholder="Last Name" [(ngModel)]="lastname">
+            </div>
+          </div>
+
+          <!-- PERSONAL INFORMATION -->
+          <div class="row mt-5">
+            <div class="col form-heading">
+              <h6 class="text-secondary">Personal Information</h6>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="datepicker" class="form-label">Birthdate</label>
+              <input type="date" class="form-control" id="datepicker"name="birthday" [(ngModel)]="birthday">
+            </div>
+            <div class="col">
+              <div class="row">
+                <h6 class="text-secondary">Gender</h6>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <!-- Corrected code -->
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="male" [(ngModel)]="gender">
+                    <label class="form-check-label" for="male">Male</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="female"
+                      [(ngModel)]="gender">
+                    <label class="form-check-label" for="female">Female</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col">
+              <select class="form-select" name="education" [(ngModel)]="education">
+                <option value="default" name="education"selected>Select your Education</option>
+                <option>Diplamo </option>
+                <option>UG </option>
+                <option>PG</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col">
+              <label for="mail" class="form-label">Email</label>
+              <input type="mail" class="form-control" id="profile" #fileInput name="email" [(ngModel)]="email">
+            </div>
+          </div>
+
+          <!-- JOB INFORMATION -->
+          <div class="row mt-5">
+            <div class="col form-heading">
+              <h6 class="text-secondary ">Job Information</h6>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Company Name" name="company"[(ngModel)]="company">
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col">
+              <input type="number" class="form-control" placeholder="Job Experience (yrs)"name="experience" [(ngModel)]="experience">
+            </div>
+            <div class="col">
+              <input type="number" class="form-control" placeholder="Salary (LPA)"name="salary" [(ngModel)]="salary">
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="save()">save</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="submit()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- table -->
+<div class="container-fluid g-0 p-2 black-border">
+  <table class="table table-bordered">
+    <thead class="table table-dark head">
+      <tr>
+       
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Birthdate</th>
+        <th>Gender</th>
+        <th>Email</th>
+        <th>Education</th>
+        <th>Company Name</th>
+        <th>Experience-level</th>
+        <th>Salary</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+      
+        <td>{{ employee.firstname }}</td>
+        <td>{{ employee.lastname }}</td>
+        <td>{{ employee.birthday }}</td>
+        <td>{{ employee.gender }}</td>
+        <td>{{ employee.email }}</td>
+        <td>{{ employee.education }}</td>
+        <td>{{ employee.company }}</td>
+        <td>{{ employee.experience }}</td>
+        <td>{{ employee.salary }}</td>
+        <td class="btn">
+          <button class="bg-success text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="update(employee)">Update</button>
+
+          <button class="bg-danger text-white"(click)="deleteEmployee(employee.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
